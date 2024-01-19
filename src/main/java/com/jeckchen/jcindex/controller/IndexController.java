@@ -1,6 +1,8 @@
 package com.jeckchen.jcindex.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
+import com.jeckchen.jcindex.constant.LoginConstant;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,13 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @Controller
+@Slf4j
 public class IndexController {
     @PostMapping("/login/verify")
-    public String loginVerify(@RequestParam String username, @RequestParam String password, Model model) {
+    public String loginVerify(@RequestParam String password, Model model) {
         // 校验用户名和密码，这里简单演示，实际应用中需要校验数据库中的用户信息
-        if ("admin".equals(username) && "password".equals(password)) {
+        if (LoginConstant.USER_PASSWORD.equals(password)) {
             // 登录成功，给用户颁发令牌
-            StpUtil.login(username);
+            StpUtil.login(LoginConstant.USER_NAME);
             return "redirect:/home"; // 登录成功后跳转到首页或其他页面
         } else {
             model.addAttribute("error", "用户名或密码错误");

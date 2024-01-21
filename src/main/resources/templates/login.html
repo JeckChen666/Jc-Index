@@ -4,92 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <!-- 引入 Bootstrap 样式表 -->
-    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.1/css/bootstrap.min.css">
-    <style>
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #f8f9fa;
-        }
-
-        .custom-container {
-            max-width: 400px;
-            width: 100%;
-        }
-
-        .card {
-            text-align: center;
-        }
-
-        .card-header {
-            background-color: #007bff;
-            color: #fff;
-            padding: 1.25rem;
-        }
-
-        .card-title {
-            margin-bottom: 0;
-        }
-
-        .card-body {
-            padding: 1.25rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-        }
-
-        .text-danger {
-            color: #dc3545;
-        }
-    </style>
+    <!-- 引入 Tailwind CSS 样式表 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!--    <link rel="stylesheet" th:href="@{/static/css/main.css}" type="text/css">-->
 </head>
-<body>
-<div class="custom-container mt-5">
-    <div class="card">
-        <div class="card-header">
-            <h2 class="card-title">Login</h2>
+<body class="bg-gray-100 h-screen flex items-center justify-center">
+<div class="max-w-md w-full bg-white p-6 rounded-lg">
+    <h2 class="text-2xl font-bold mb-6">Login</h2>
+    <form action="/login/verify" method="post">
+        <div class="mb-6">
+            <label for="password" class="block text-sm font-medium text-gray-600">Password:</label>
+            <input type="password" class="mt-1 p-2 w-full border rounded-md" id="password" name="password" required>
+            <p class="text-sm text-gray-500 mt-1">Tip: 输入作者的姓名。例如：蔡徐坤-->CaiXuKun</p>
         </div>
-        <div class="card-body">
-            <form action="/login/verify" method="post">
-                <div class="form-group">
-                    <div class="text-start fs-4 mt-2">
-                        <label for="password">Password:</label>
-                    </div>
-                    <div class="mt-2">
-                        <input type="password" class="form-control" id="password" name="password" required>
-                    </div>
-                    <div class="text-start text-muted mt-2">
-                        <label>Tip:输入作者的姓名。例如：蔡徐坤-->CaiXuKun</label>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Submit</button>
-            </form>
-            <p th:if="${error}" class="text-danger mt-3">Error: <span th:text="${error}"></span></p>
-        </div>
-    </div>
+        <button type="submit" class="bg-blue-500 text-white p-2 w-full rounded-md">Submit</button>
+    </form>
+    <p th:if="${error}" class="text-danger mt-3">Error: <span th:text="${error}"></span></p>
 </div>
-
-<!-- 引入 Bootstrap 的 JavaScript 和 Popper.js -->
-<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.1/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

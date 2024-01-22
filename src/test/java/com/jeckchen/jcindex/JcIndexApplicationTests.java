@@ -9,5 +9,4 @@ class JcIndexApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }

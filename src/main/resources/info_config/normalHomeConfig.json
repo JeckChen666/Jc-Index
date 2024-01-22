@@ -1,0 +1,35 @@
+{
+  "avatarPath": "http://q1.qlogo.cn/g?b=qq&nk=1204798253&s=100",
+  "nickname": "Your Nickname",
+  "selfIntroduction": "Your self-introduction goes here. Keep it brief and meaningful.",
+  "buttons": [
+    {
+      "tagName": "Button 1",
+      "tagLink": "/button1"
+    },
+    {
+      "tagName": "Button 2",
+      "tagLink": "/button2"
+    },
+    {
+      "tagName": "Button 3",
+      "tagLink": "https://bing.com"
+    },
+    {
+      "tagName": "Button 3",
+      "tagLink": "https://bing.com"
+    },
+    {
+      "tagName": "Button 3",
+      "tagLink": "https://bing.com"
+    },
+    {
+      "tagName": "Button 3",
+      "tagLink": "https://bing.com"
+    },
+    {
+      "tagName": "Button 3",
+      "tagLink": "https://bing.com"
+    }
+  ]
+}

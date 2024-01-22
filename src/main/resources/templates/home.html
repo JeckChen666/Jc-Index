@@ -3,11 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World</title>
+    <!-- 引入 Tailwind CSS 样式表 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!--    <link rel="stylesheet" th:href="@{/static/css/main.css}" type="text/css">-->    <title>Hello World</title>
 </head>
-<body>
-
-<h1 th:text="'Hello World'">Hello World</h1>
-
+<body class="flex items-center justify-center h-screen bg-gray-100">
+<div class="text-center">
+    <!-- 头像和网名 -->
+    <div class="mb-4 flex items-center justify-center">
+        <div class="w-16 h-16 rounded-full overflow-hidden">
+            <img th:src="${info.getAvatarPath()?:''}" alt="Your Avatar" class="w-full h-full object-cover">
+        </div>
+        <div class="ml-4">
+            <h2 class="text-lg font-bold" th:text="${info.getNickname() ?: 'Default Nickname'}"></h2>
+        </div>
+    </div>
+    <!-- 自我简介 -->
+    <div class="mb-4 flex items-center justify-center h-12">
+        <p class="text-gray-600" th:text="${info.getSelfIntroduction() ?: 'Default Self-Introduction'}"></p>
+    </div>
+    <!-- 判断按钮组是否为空 -->
+    <div th:if="${not #lists.isEmpty(info.getButtons())}" class="mb-4 flex items-center justify-center flex-wrap">
+        <!-- 使用Thymeleaf迭代生成按钮 -->
+        <div th:each="button : ${info.getButtons()}" class="my-3 mx-2">
+            <a th:href="@{${button.getTagLink()}}" class="h-16 bg-blue-500 text-white px-4 py-2 rounded-md transition duration-300 ease-in-out transform hover:bg-blue-600 hover:scale-105" th:text="${button.getTagName()}"></a>
+        </div>
+    </div>
+    <!-- 按钮 -->
+    <div class="mt-4 mb-4 flex items-center justify-center">
+        <button class="bg-green-500 text-white px-4 py-2 rounded-md transition duration-300 ease-in-out transform hover:bg-green-600 hover:scale-105">Click Me</button>
+    </div>
+</div>
 </body>
 </html>

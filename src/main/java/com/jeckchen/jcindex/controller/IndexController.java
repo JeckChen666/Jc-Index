@@ -2,14 +2,15 @@ package com.jeckchen.jcindex.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.jeckchen.jcindex.constant.LoginConstant;
+import com.jeckchen.jcindex.pojo.NormalHomeDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+
 
 /**
  * @author JeckChen
@@ -28,20 +29,23 @@ public class IndexController {
         if (LoginConstant.USER_PASSWORD.equals(password)) {
             // 登录成功，给用户颁发令牌
             StpUtil.login(LoginConstant.USER_NAME);
-            return "redirect:/home"; // 登录成功后跳转到首页或其他页面
+            // 登录成功后跳转到首页或其他页面
+            return "redirect:/home";
         } else {
             model.addAttribute("error", "用户名或密码错误");
-            return "login"; // 登录失败，返回登录页面
+            // 登录失败，返回登录页面
+            return "login";
         }
     }
 
     @RequestMapping("/login")
-    public String login(){
+    public String login() {
         return "login";
     }
 
-    @RequestMapping(value = {"/","/home"})
-    public String index(){
+    @RequestMapping(value = {"/", "/home"})
+    public String index(Model model) {
+        model.addAttribute("info", NormalHomeDTO.getInstance());
         return "home";
     }
 }

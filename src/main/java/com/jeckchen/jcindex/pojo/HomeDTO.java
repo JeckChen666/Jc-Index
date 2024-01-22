@@ -28,7 +28,7 @@ public class HomeDTO implements Serializable {
     private String selfIntroduction;
     private List<ButtonVO> buttons;
 
-    protected static HomeDTO initProperty(HomeDTO entity, String path) {
+    protected static HomeDTO initProperty(String path) {
         // 示例path "src/main/resources/example.json"
         // 判断文件是否存在
         if (!FileUtil.exist(path)) {

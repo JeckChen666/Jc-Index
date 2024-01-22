@@ -26,7 +26,7 @@ public class AdminHomeDTO extends HomeDTO {
 
     public static HomeDTO getInstance() {
         String adminHomeInfoConfigPath = ConfigConstant.ADMIN_HOME_INFO_CONFIG_PATH;
-        instance = initProperty(instance, adminHomeInfoConfigPath);
+        instance = initProperty(adminHomeInfoConfigPath);
         return instance;
     }
 
@@ -42,6 +42,6 @@ public class AdminHomeDTO extends HomeDTO {
             return;
         }
         FileUtil.writeUtf8String(json, ConfigConstant.ADMIN_HOME_INFO_CONFIG_PATH);
-        initProperty(this, ConfigConstant.ADMIN_HOME_INFO_CONFIG_PATH);
+        instance = initProperty(ConfigConstant.ADMIN_HOME_INFO_CONFIG_PATH);
     }
 }

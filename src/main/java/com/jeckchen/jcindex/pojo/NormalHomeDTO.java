@@ -1,7 +1,6 @@
 package com.jeckchen.jcindex.pojo;
 
 import cn.hutool.core.io.FileUtil;
-import cn.hutool.json.JSON;
 import cn.hutool.json.JSONUtil;
 import com.jeckchen.jcindex.constant.ConfigConstant;
 import lombok.Data;
@@ -26,7 +25,7 @@ public class NormalHomeDTO extends HomeDTO {
     }
 
     public static HomeDTO getInstance() {
-        instance = initProperty(instance, ConfigConstant.NORMAL_HOME_INFO_CONFIG_PATH);
+        instance = initProperty(ConfigConstant.NORMAL_HOME_INFO_CONFIG_PATH);
         return instance;
     }
 
@@ -42,6 +41,6 @@ public class NormalHomeDTO extends HomeDTO {
             return;
         }
         FileUtil.writeUtf8String(json,ConfigConstant.NORMAL_HOME_INFO_CONFIG_PATH);
-        initProperty(this, ConfigConstant.NORMAL_HOME_INFO_CONFIG_PATH);
+        instance = initProperty(ConfigConstant.NORMAL_HOME_INFO_CONFIG_PATH);
     }
 }

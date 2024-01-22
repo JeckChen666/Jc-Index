@@ -15,7 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    String[] excludePathPatterns = {"/login", "/login/verify", "/static/**"};
+    String[] excludePathPatterns = {"/", "/index", "/login", "/login/verify", "/static/**"};
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

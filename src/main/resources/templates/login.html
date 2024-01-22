@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>友情的校验</title>
     <!-- 引入 Tailwind CSS 样式表 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!--    <link rel="stylesheet" th:href="@{/static/css/main.css}" type="text/css">-->
 </head>
 <body class="bg-gray-100 h-screen flex items-center justify-center">
 <div class="max-w-md w-full bg-white p-6 rounded-lg">
-    <h2 class="text-2xl font-bold mb-6">Login</h2>
+    <h2 class="text-2xl font-bold mb-6">猜猜我是谁~</h2>
     <form action="/login/verify" method="post">
         <div class="mb-6">
-            <label for="password" class="block text-sm font-medium text-gray-600">Password:</label>
+            <label for="password" class="block text-sm font-medium text-gray-600">作者叫啥:</label>
             <input class="mt-1 p-2 w-full border rounded-md" id="password" name="password" required>
-            <p class="text-sm text-gray-500 mt-1">Tip: 输入作者的姓名。例如：蔡徐坤-->CaiXuKun</p>
+            <p class="text-sm text-gray-500 mt-1">Example:CaiXuKun</p>
         </div>
-        <button type="submit" class="bg-blue-500 text-white p-2 w-full rounded-md">Submit</button>
+        <button type="submit" class="bg-blue-500 text-white p-2 w-full rounded-md">我认识你</button>
+    </form>
+    <form action="/" method="post">
+        <button type="submit" class="mt-4 bg-blue-500 text-white p-2 w-full rounded-md">算了，我不认识你</button>
     </form>
     <p th:if="${error}" class="text-danger mt-3">Error: <span th:text="${error}"></span></p>
 </div>

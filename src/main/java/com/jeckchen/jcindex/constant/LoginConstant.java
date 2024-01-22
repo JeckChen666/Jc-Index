@@ -3,9 +3,7 @@ package com.jeckchen.jcindex.constant;
 import jakarta.annotation.PostConstruct;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 /**
  * @author JeckChen
@@ -19,17 +17,25 @@ import org.springframework.stereotype.Service;
 public class LoginConstant {
 
     @Value("${jc.login.default.username}")
-    private String username;
+    private String defaultUsername;
     @Value("${jc.login.default.password}")
-    private String password;
+    private String defaultPassword;
+    @Value("${jc.login.admin.username}")
+    private String adminUsername;
+    @Value("${jc.login.admin.password}")
+    private String adminPassword;
 
-    public static String USER_NAME;
-    public static String USER_PASSWORD;
+    public static String DEFAULT_USER_NAME;
+    public static String DEFAULT_USER_PASSWORD;
+    public static String ADMIN_USER_NAME;
+    public static String ADMIN_USER_PASSWORD;
 
     @PostConstruct
     public void init() {
-        USER_NAME = username;
-        USER_PASSWORD = password;
+        DEFAULT_USER_NAME = defaultUsername;
+        DEFAULT_USER_PASSWORD = defaultPassword;
+        ADMIN_USER_NAME = adminUsername;
+        ADMIN_USER_PASSWORD = adminPassword;
     }
 
 }

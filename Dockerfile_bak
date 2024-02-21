@@ -1,0 +1,53 @@
+## Dockerfile_bak 用于构建支持 GraalVM Native Image 的 Spring Boot 应用程序
+## 使用多阶段构建以减小最终镜像大小。
+#
+## 第一阶段：构建阶段
+## 使用官方 GraalVM 基础镜像，包含 Java 17
+## 镜像版本号来源于 GraalVM GitHub 容器仓库
+#FROM ghcr.io/graalvm/graalvm-ce:ol8-java11-22.3.3
+#
+## 将整个项目复制到容器内的 /build 目录
+#ADD . /build
+#
+## 设置工作目录为 /build
+#WORKDIR /build
+#
+## 安装 unzip 和 zip 以使 SDKMAN 正常工作
+## graalvm/graalvm-ce 默认不包含 yum，因此使用 rpm 安装这些包
+#RUN \
+#    rpm -ivh https://yum.oracle.com/repo/OracleLinux/OL8/baseos/latest/x86_64/getPackage/unzip-6.0-46.el8.x86_64.rpm && \
+#    rpm -ivh https://yum.oracle.com/repo/OracleLinux/OL8/baseos/latest/x86_64/getPackage/zip-3.0-23.el8.x86_64.rpm && \
+#    # 安装 SDKMAN
+#    curl -s "https://get.sdkman.io" | bash; \
+#    source "$HOME/.sdkman/bin/sdkman-init.sh"; \
+#    sdk install maven; \
+#    # 安装 GraalVM Native Image
+#    gu install native-image;
+#
+## 验证 Maven 和 GraalVM 安装
+#RUN source "$HOME/.sdkman/bin/sdkman-init.sh" && mvn --version && native-image --version
+#
+## 使用 Maven 构建 Spring Boot 应用程序并生成 GraalVM Native Image
+#RUN source "$HOME/.sdkman/bin/sdkman-init.sh" && mvn -Pnative clean package -DskipTests
+#
+## 第二阶段：运行时阶段
+## 使用轻量级 Oracle Linux 7 slim 作为最终镜像的基础
+#FROM oraclelinux:7-slim
+#
+## 设置维护者信息
+#MAINTAINER JeckChen
+#
+## 设置工作目录为 /app
+#WORKDIR /app
+#
+## 从构建阶段复制编译好的 Spring Boot 应用程序
+#COPY --from=0 "/build/target/spring-native-demo" spring-native-demo
+#
+## 定义应用程序端口的环境变量
+#ENV PORT=5000
+#
+## 暴露应用程序端口
+#EXPOSE $PORT
+#
+## 定义运行 Spring Boot 应用程序的默认命令
+#CMD [ "sh", "-c", "./spring-native-demo -Dserver.port=$PORT" ]
